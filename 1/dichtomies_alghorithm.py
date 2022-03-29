@@ -1,16 +1,29 @@
-import math
+from math import sin, cos, log
+import matplotlib.pyplot as plt
+
+eps = 0.001  # точность
+f = lambda x: x ** 2 + 3  # функция
+a = -1  # левая граница
+b = 1  # правая граница
+
+a, b = min(a, b), max(a, b)
+plt.plot([i / 1000 + a for i in range((b - a) * 1000)],
+         [f(i / 1000 + a) for i in range((b - a) * 1000)])
+plt.show()
 
 
-def dichotomies_algorithm(function: (float, float), a: int, b: int, eps=1e-5):
-    n = 0
-    while abs(b - a) > eps:
-        n += 1
-        x = (a + b) / 2.0
-        function_with_x_result = function(x)
-        function_with_a_result = function(a)
-        if (function_with_x_result < 0 and function_with_a_result < 0) \
-                or (function_with_x_result > 0 and function_with_a_result > 0):
-            a = x
+def dichtomy(a: float, b: float, eps: float):
+    interval_sizes = []
+    iteration_counter: int = 0
+    while abs(a - b) > eps:
+        interval_sizes.append(a - b)
+        iteration_counter += 1
+        c = (a + b) / 2
+        if f(c - (eps / 2)) <= f(c + (eps / 2)):
+            b = c
         else:
-            b = x
-    return x, n
+            a = c
+    return c, iteration_counter, iteration_counter * 2, interval_sizes
+
+
+print(dichtomy(a, b, eps))
