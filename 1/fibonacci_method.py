@@ -16,9 +16,7 @@ def fibonacci_method(func: (), a: float, b: float, eps: float) -> (int, int):
     function_usage_count = 2
     f_x1 = func(x_1)
     f_x2 = func(x_2)
-    segment_delta = b - a
-    segment_delta_array = []
-
+    segment_delta_array = [b - a]
     # крутимся, пока количество итераций не станет равно тому к-ву, которое мы посчитали, исходя из длины интервала и заданной точности
     while iterations_count != total_amount_of_iterations:
         iterations_count += 1
@@ -37,11 +35,10 @@ def fibonacci_method(func: (), a: float, b: float, eps: float) -> (int, int):
             f_x2 = func(x_2)
 
         # здесь мы занимаемся данными, которые нам надо вернуть, динамику измемения интервала, количество вычислений ф-ии и к-во итераций алгоритма
-        segment_delta = abs(segment_delta - (start_interval + end_interval) / 2)
+        segment_delta = abs(end_interval - start_interval)
         segment_delta_array.append(segment_delta)
         function_usage_count += 1
-
-    return min(func(x_1), func(x_2)), iterations_count, function_usage_count, segment_delta_array
+    return func((x_1 + x_2) / 2), iterations_count, function_usage_count, segment_delta_array
 
 
 '''
@@ -86,3 +83,10 @@ def find_n(number: float) -> int:
         count += 1
 
     return count
+
+
+def function(argument: float) -> float:
+    return math.log10(argument ** 2) + 1 - math.sin(argument)
+
+
+print(fibonacci_method(function, -100, 99, 0.001))
