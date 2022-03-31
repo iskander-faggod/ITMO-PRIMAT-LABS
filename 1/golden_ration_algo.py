@@ -35,8 +35,3 @@ def golden_ratio_algorithm(a: float, b: float, eps: float, func: ()):
     return func((a + b) / 2), function_count_iterations, algo_iterations, segment_delta_array
 
 
-def function(argument: float) -> float:
-    return math.log10(argument ** 2) + 1 - math.sin(argument)
-
-
-print(golden_ratio_algorithm(-100, 99, 0.001, function))

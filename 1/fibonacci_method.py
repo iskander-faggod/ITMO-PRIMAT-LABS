@@ -85,8 +85,4 @@ def find_n(number: float) -> int:
     return count
 
 
-def function(argument: float) -> float:
-    return math.log10(argument ** 2) + 1 - math.sin(argument)
 
-
-print(fibonacci_method(function, -100, 99, 0.001))
